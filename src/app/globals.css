@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #07050f;
+  --foreground: #f3f4f6;
+  --card: #0b0918;
+  --primary: #7c3aed;
+  --border: #1a1538;
+  --input: #0f0d22;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* Global button reset — no white backgrounds */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #25204d;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #393276;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #1e1b3d;
+  border-radius: 9999px;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: linear-gradient(180deg, #0c0a1a 0%, #09071580 100%);
+}
+
+/* ── React Flow ── */
+.react-flow__node {
+  font-family: inherit;
+}
+.react-flow__edge-path {
+  stroke-width: 2px;
+}
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 3.5px;
+}
+.react-flow__controls {
+  bottom: 24px !important;
+  right: 24px !important;
+}
+.react-flow__controls-button {
+  background: #0b0918 !important;
+  color: #a78bfa !important;
+  border-bottom: 1px solid #211d40 !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-top: none !important;
+  transition: all 0.2s !important;
+}
+.react-flow__controls-button:hover {
+  background: #1c183a !important;
+  color: #c4b5fd !important;
+}
+.react-flow__minimap {
+  background-color: #0b0918 !important;
+  border: 1px solid #211d40 !important;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
 }

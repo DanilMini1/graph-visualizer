@@ -1,0 +1,291 @@
+{
+  "nodes": [
+    {
+      "id": "AuthModule",
+      "label": "AuthModule",
+      "type": "module",
+      "community": 0,
+      "degree_centrality": 0.8,
+      "betweenness_centrality": 0.7,
+      "confidence": 0.9,
+      "source_file": "src/auth/AuthModule.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "AuthService",
+      "label": "AuthService",
+      "type": "service",
+      "community": 0,
+      "degree_centrality": 0.6,
+      "betweenness_centrality": 0.5,
+      "confidence": 0.95,
+      "source_file": "src/auth/AuthService.ts",
+      "source_location": "line 10"
+    },
+    {
+      "id": "LoginComponent",
+      "label": "LoginComponent",
+      "type": "component",
+      "community": 0,
+      "degree_centrality": 0.5,
+      "betweenness_centrality": 0.3,
+      "confidence": 0.85,
+      "source_file": "src/auth/Login.tsx",
+      "source_location": "line 1"
+    },
+    {
+      "id": "RegisterComponent",
+      "label": "RegisterComponent",
+      "type": "component",
+      "community": 0,
+      "degree_centrality": 0.4,
+      "betweenness_centrality": 0.2,
+      "confidence": 0.8,
+      "source_file": "src/auth/Register.tsx",
+      "source_location": "line 1"
+    },
+    {
+      "id": "Database",
+      "label": "Database",
+      "type": "storage",
+      "community": 1,
+      "degree_centrality": 0.9,
+      "betweenness_centrality": 0.8,
+      "confidence": 1.0,
+      "source_file": "src/db/Database.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "UserRepository",
+      "label": "UserRepository",
+      "type": "repository",
+      "community": 1,
+      "degree_centrality": 0.7,
+      "betweenness_centrality": 0.6,
+      "confidence": 0.95,
+      "source_file": "src/db/repositories/UserRepository.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "ProductRepository",
+      "label": "ProductRepository",
+      "type": "repository",
+      "community": 1,
+      "degree_centrality": 0.6,
+      "betweenness_centrality": 0.5,
+      "confidence": 0.9,
+      "source_file": "src/db/repositories/ProductRepository.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "APIController",
+      "label": "APIController",
+      "type": "controller",
+      "community": 2,
+      "degree_centrality": 0.8,
+      "betweenness_centrality": 0.7,
+      "confidence": 0.9,
+      "source_file": "src/api/APIController.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "ProductService",
+      "label": "ProductService",
+      "type": "service",
+      "community": 2,
+      "degree_centrality": 0.6,
+      "betweenness_centrality": 0.5,
+      "confidence": 0.95,
+      "source_file": "src/services/ProductService.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "OrderService",
+      "label": "OrderService",
+      "type": "service",
+      "community": 2,
+      "degree_centrality": 0.5,
+      "betweenness_centrality": 0.4,
+      "confidence": 0.9,
+      "source_file": "src/services/OrderService.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "ProductComponent",
+      "label": "ProductComponent",
+      "type": "component",
+      "community": 2,
+      "degree_centrality": 0.4,
+      "betweenness_centrality": 0.3,
+      "confidence": 0.85,
+      "source_file": "src/components/Product.tsx",
+      "source_location": "line 1"
+    },
+    {
+      "id": "OrderComponent",
+      "label": "OrderComponent",
+      "type": "component",
+      "community": 2,
+      "degree_centrality": 0.4,
+      "betweenness_centrality": 0.3,
+      "confidence": 0.85,
+      "source_file": "src/components/Order.tsx",
+      "source_location": "line 1"
+    },
+    {
+      "id": "CacheService",
+      "label": "CacheService",
+      "type": "service",
+      "community": 3,
+      "degree_centrality": 0.7,
+      "betweenness_centrality": 0.6,
+      "confidence": 0.95,
+      "source_file": "src/cache/CacheService.ts",
+      "source_location": "line 1"
+    },
+    {
+      "id": "RedisClient",
+      "label": "RedisClient",
+      "type": "client",
+      "community": 3,
+      "degree_centrality": 0.5,
+      "betweenness_centrality": 0.4,
+      "confidence": 0.9,
+      "source_file": "src/cache/RedisClient.ts",
+      "source_location": "line 1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "LoginComponent",
+      "target": "AuthService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "RegisterComponent",
+      "target": "AuthService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "AuthService",
+      "target": "AuthModule",
+      "type": "part-of",
+      "weight": 1,
+      "confidence": 1.0
+    },
+    {
+      "source": "AuthService",
+      "target": "UserRepository",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.95
+    },
+    {
+      "source": "UserRepository",
+      "target": "Database",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 1.0
+    },
+    {
+      "source": "ProductRepository",
+      "target": "Database",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 1.0
+    },
+    {
+      "source": "APIController",
+      "target": "ProductService",
+      "type": "calls",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "APIController",
+      "target": "OrderService",
+      "type": "calls",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "ProductService",
+      "target": "ProductRepository",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.95
+    },
+    {
+      "source": "OrderService",
+      "target": "ProductRepository",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "OrderService",
+      "target": "UserRepository",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.9
+    },
+    {
+      "source": "ProductComponent",
+      "target": "ProductService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.85
+    },
+    {
+      "source": "OrderComponent",
+      "target": "OrderService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.85
+    },
+    {
+      "source": "ProductService",
+      "target": "CacheService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.8
+    },
+    {
+      "source": "OrderService",
+      "target": "CacheService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.8
+    },
+    {
+      "source": "CacheService",
+      "target": "RedisClient",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 1.0
+    },
+    {
+      "source": "AuthService",
+      "target": "CacheService",
+      "type": "uses",
+      "weight": 1,
+      "confidence": 0.7
+    }
+  ],
+  "communities": {
+    "0": "Authentication",
+    "1": "Data Layer",
+    "2": "Business Logic",
+    "3": "Caching"
+  },
+  "metadata": {
+    "total_nodes": 14,
+    "total_edges": 17,
+    "total_communities": 4,
+    "generated_at": "2024-01-15T10:30:00Z"
+  }
+}
