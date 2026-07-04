@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GraphAnalyzer
 
-## Getting Started
+> Интерактивная система анализа и визуализации скрытых технологических связей в научном материаловедении и металлургии. Разработано в рамках хакатона «Норникель AI Science Hack» (трек «Научный клубок»).
 
-First, run the development server:
+[![Live Demo](https://img.shields.io/badge/Demo-danil.goida2.ru%2Fgraph-blueviolet?style=for-the-badge)](https://danil.goida2.ru/graph)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16%20(App%20Router)-black?style=flat-square&logo=nextdotjs)](https://nextjs.org/)
+[![React Flow](https://img.shields.io/badge/xyflow%2Freact-12.0-7c3aed?style=flat-square)](https://reactflow.dev/)
+[![D3.js](https://img.shields.io/badge/D3.js-8.0-f59e0b?style=flat-square&logo=d3)](https://d3js.org/)
 
+---
+
+## 🌟 Ключевые возможности
+
+1. **Интерактивный граф знаний (Knowledge Graph)**:
+   * Аппаратно-ускоренный рендеринг на базе `@xyflow/react` с поддержкой плавного масштабирования и перемещения.
+   * Динамическое масштабирование размеров узлов на основе метрики важности (`degree_centrality`).
+   * Цветовая группировка узлов по сообществам на основе алгоритмов кластеризации (Louvain community detection).
+
+2. **Оптимизированный Force-Directed Layout**:
+   * Автоматический расчет координат узлов с помощью физической симуляции сил притяжения и отталкивания на базе `d3-force`.
+   * Специальный режим **Community-Aware Layout**, группирующий узлы вокруг общих круговых центров сообществ для читаемости больших графов.
+
+3. **Локальный NLP Engine (Умный поиск)**:
+   * Разбор естественно-языковых поисковых запросов непосредственно на клиенте.
+   * Специализированный словарь синонимов для металлургической R&D отрасли (более 30 групп терминов).
+   * Выделение временных диапазонов (например, *«за последние 3 года»*), географических признаков (*«в России»*) и числовых фильтров параметров (*«Ni > 5%»*).
+   * Автоматическое плавное центрирование и приближение камеры к найденной сущности.
+
+4. **Трассировщик скрытых связей (Pathfinding)**:
+   * Быстрый поиск кратчайшего пути между любыми двумя сущностями в графе (алгоритм Дейкстры / BFS).
+   * Подсветка цепочки связей с автоматическим затемнением остального графа.
+   * Анимированная отрисовка потока отношений между процессами, материалами и свойствами.
+
+---
+
+## 🛠️ Технологический стек
+
+* **Frontend**: Next.js 16 (App Router, Standalone mode), React 19, TypeScript
+* **Стилизация**: TailwindCSS v4, Custom Dark Premium Glassmorphism Theme
+* **Графика и физика**: `@xyflow/react` (React Flow), `d3-force`
+* **Деплой**: Docker-контейнер на удаленной ВМ, прокси-сервер Caddy, SSL-сертификаты.
+
+---
+
+## 🚀 Быстрый запуск
+
+### Требования
+* Node.js v18.0.0 или выше
+* npm или yarn
+
+### Установка зависимостей
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Запуск в режиме разработки
+```bash
+npm run dev
+```
+Откройте [http://localhost:3000/graph](http://localhost:3000/graph) в браузере.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Сборка и запуск продакшн-версии
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📊 Формат обмена данными `graph.json`
 
-To learn more about Next.js, take a look at the following resources:
+Приложение принимает унифицированную структуру графа, экспортируемую любыми внешними ML-пайплайнами:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{
+  "nodes": [
+    {
+      "id": "mat_nickel",
+      "label": "Никель",
+      "type": "material",
+      "community": 0,
+      "degree_centrality": 0.95,
+      "confidence": 1.0,
+      "source_file": "отчет_1.pdf",
+      "source_location": "стр. 15"
+    }
+  ],
+  "edges": [
+    {
+      "source": "proc_flotation",
+      "target": "mat_nickel",
+      "type": "produces",
+      "weight": 1.0,
+      "confidence": 0.98
+    }
+  ]
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 👥 Команда «Четыре туза»
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Проект разработан командой **«Четыре туза»** в рамках хакатона «Норникель AI Science Hack» (Июль 2026):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Минниханов Данил** — Системный анализ, развертывание инфраструктуры, Caddy-маршрутизация, дизайн интерфейсов и презентации.
+* **Кубинский Арсений** — Сбор данных, R&D-аналитика металлургических R&D кейсов, подготовка демонстрационных наборов данных.
+* **Михаил Селезнев** — ML-разработка, архитектура визуализатора, d3-layout, клиентский NLP Engine и алгоритмы поиска путей.
+* **Корниенко Константин** — Frontend-разработка интерфейса, внедрение Tailwind-стилей, верстка сайдбара и карточек свойств.
+
+---
+
+## 📄 Лицензия и Авторские права
+
+© 2026 Команда «Четыре туза». Все права защищены.
+
+Программное обеспечение и сопроводительные материалы разработаны специально для презентации на хакатоне «Норникель AI Science Hack». Любое коммерческое использование, копирование или распространение без предварительного согласия правообладателей (команды «Четыре туза») строго запрещено.
