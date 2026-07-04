@@ -184,6 +184,15 @@ const GraphViewInner = forwardRef<GraphViewRef, GraphViewProps>(
       setPathResult(null);
     }, [setNodes, setEdges]);
 
+    // Обработка клика по свободному пространству холста
+    const onPaneClickHandler = useCallback(
+      (_event: React.MouseEvent) => {
+        setSelectedNode(null);
+        internalResetHighlight();
+      },
+      [internalResetHighlight]
+    );
+
     // Поиск кратчайшего пути
     const internalFindPath = useCallback(
       (startNodeId: string, endNodeId: string) => {
@@ -275,6 +284,7 @@ const GraphViewInner = forwardRef<GraphViewRef, GraphViewProps>(
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onNodeClick={onNodeClickHandler}
+          onPaneClick={onPaneClickHandler}
           nodeTypes={nodeTypes}
           fitView
           className="bg-gray-900"
