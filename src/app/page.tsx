@@ -94,11 +94,8 @@ export default function Home() {
   }, [graph]);
 
   const handleNodeSelect = useCallback((nodeId: string) => {
-    if (graphViewRef.current) {
-      const node = getNodeById(nodeId);
-      if (node) {
-        console.log('Selected node:', node);
-      }
+    if (graphViewRef.current?.selectNode) {
+      graphViewRef.current.selectNode(nodeId);
     }
   }, []);
 

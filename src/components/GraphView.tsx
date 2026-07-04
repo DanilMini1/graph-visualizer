@@ -13,6 +13,8 @@ import {
   Edge,
   Node,
   BackgroundVariant,
+  ReactFlowProvider,
+  useReactFlow,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { CustomNode } from './CustomNode';
@@ -27,6 +29,7 @@ const nodeTypes = {
 export interface GraphViewRef {
   findPath: (startNodeId: string, endNodeId: string) => void;
   resetHighlight: () => void;
+  selectNode: (nodeId: string) => void;
 }
 
 interface GraphViewProps {
@@ -36,12 +39,27 @@ interface GraphViewProps {
   height?: number;
 }
 
-export const GraphView = forwardRef<GraphViewRef, GraphViewProps>(
+const GraphViewInner = forwardRef<GraphViewRef, GraphViewProps>(
   ({ graph, onNodeClick, width = 1200, height = 800 }, ref) => {
+    const { fitView } = useReactFlow();
     const [nodes, setNodes, onNodesChange] = useNodesState<ReactFlowNode>([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState<ReactFlowEdge>([]);
     const [pathResult, setPathResult] = useState<PathResult | null>(null);
     const [selectedNode, setSelectedNode] = useState<string | null>(null);
+
+    const zoomToNode = useCallback(
+      (nodeId: string) => {
+        setTimeout(() => {
+          fitView({
+            nodes: [{ id: nodeId }],
+            duration: 1000,
+            minZoom: 1.2,
+            maxZoom: 1.5,
+          });
+        }, 50);
+      },
+      [fitView]
+    );
 
     // Expose methods via ref
     useImperativeHandle(ref, () => ({
@@ -50,6 +68,11 @@ export const GraphView = forwardRef<GraphViewRef, GraphViewProps>(
       },
       resetHighlight: () => {
         internalResetHighlight();
+      },
+      selectNode: (nodeId: string) => {
+        setSelectedNode(nodeId);
+        highlightNode(nodeId);
+        zoomToNode(nodeId);
       },
     }));
 
@@ -340,5 +363,13 @@ export const GraphView = forwardRef<GraphViewRef, GraphViewProps>(
     );
   }
 );
+
+GraphViewInner.displayName = 'GraphViewInner';
+
+export const GraphView = forwardRef<GraphViewRef, GraphViewProps>((props, ref) => (
+  <ReactFlowProvider>
+    <GraphViewInner {...props} ref={ref} />
+  </ReactFlowProvider>
+));
 
 GraphView.displayName = 'GraphView';
